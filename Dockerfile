@@ -1,11 +1,14 @@
-FROM alpine:3.9
+FROM alpine:3.10
 LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
-      Description="Lightweight WordPress container with Nginx 1.14 & PHP-FPM 7.2 based on Alpine Linux."
+      Description="Lightweight WordPress container with Nginx 1.16 & PHP-FPM 7.3.9-r0 based on Alpine Linux."
 
 # Install packages from testing repo's
 RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl \
     php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-xmlwriter \
-    php7-simplexml php7-ctype php7-mbstring php7-gd nginx supervisor curl bash less
+    php7-simplexml php7-ctype php7-mbstring php7-gd nginx supervisor curl bash less \
+    tzdata zip libmcrypt-dev zlib-dev gmp-dev freetype-dev libjpeg-turbo-dev libpng-dev \
+	mysql-client php7-pdo php7-pdo_mysql php7-session php7-iconv php7-mcrypt php7-gmp \
+	php7-zip php7-opcache php7-apcu php7-bcmath && apk add -u musl && rm -rf /var/cache/apk/*
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
