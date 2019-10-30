@@ -29,7 +29,6 @@ jobs:
         name: Login
         uses: azure/container-actions/docker-login@master
         with:
-          login-server: docker.io
           username: kryjex
           password: ${{ secrets.REGISTRY_TOKEN }}
       -
