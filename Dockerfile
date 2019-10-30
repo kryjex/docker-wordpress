@@ -6,7 +6,7 @@ LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
 RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl \
     php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-xmlwriter \
     php7-simplexml php7-ctype php7-mbstring php7-gd nginx supervisor curl bash less \
-    tzdata zip libmcrypt-dev zlib-dev gmp-dev freetype-dev libjpeg-turbo-dev libpng-dev mysql-client \
+    tzdata zip libmcrypt-dev zlib-dev gmp-dev freetype-dev libjpeg-turbo-dev libpng-dev mysql-client ghostscript \
     php7-pdo php7-pdo_mysql php7-session php7-iconv php7-mcrypt php7-gmp \
     php7-zip php7-opcache php7-apcu php7-bcmath \
     && apk add -u musl && rm -rf /var/cache/apk/*
@@ -27,8 +27,8 @@ WORKDIR /var/www/wp-content
 RUN chown -R nobody.nobody /var/www
 
 # WordPress
-ENV WORDPRESS_VERSION 5.2.2
-ENV WORDPRESS_SHA1 3605bcbe9ea48d714efa59b0eb2d251657e7d5b0
+ENV WORDPRESS_VERSION 5.2.4
+ENV WORDPRESS_SHA1 9eb002761fc8b424727d8c9d291a6ecfde0c53b7
 
 RUN mkdir -p /usr/src
 
