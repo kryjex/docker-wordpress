@@ -3,7 +3,7 @@ LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
       Description="Lightweight WordPress container with Nginx 1.16 & PHP-FPM 7.3 based on Alpine Linux."
 
 # Install packages from testing repo's
-RUN apk --no-cache add php7-mysqli php7-json php7-openssl php7-curl \
+RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl \
     php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-xmlwriter \
     php7-simplexml php7-ctype php7-mbstring php7-gd nginx supervisor curl bash less \
     freetype libpng libjpeg-turbo freetype-dev libjpeg-turbo-dev libpng-dev \
@@ -13,8 +13,9 @@ RUN apk --no-cache add php7-mysqli php7-json php7-openssl php7-curl \
     && apk add -u musl && rm -rf /var/cache/apk/*
     
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
+
 RUN pecl install imagick-3.4.4
-RUN docker-php-ext-enable imagick
+RUN docker-php-ext-enable imagick;
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
