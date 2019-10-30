@@ -10,6 +10,8 @@ RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-cur
     php7-pdo php7-pdo_mysql php7-session php7-iconv php7-mcrypt php7-gmp \
     php7-zip php7-opcache php7-apcu php7-bcmath \
     && apk add -u musl && rm -rf /var/cache/apk/*
+    
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
