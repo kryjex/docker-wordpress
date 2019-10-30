@@ -19,12 +19,12 @@ jobs:
         name: Run Buildx (x64)
         run: |
           docker buildx build --load --platform linux/amd64 \
-          -t index.docker.io/library/kryjex/docker-wordpress:latest .
+          -t kryjex/docker-wordpress:latest .
       -
         name: Run Buildx (ARM)
         run: |
           docker buildx build --load --platform linux/arm64 \
-          -t index.docker.io/library/kryjex/docker-wordpress:arm64 .
+          -t kryjex/docker-wordpress:arm64 .
       -
         name: Login
         uses: azure/container-actions/docker-login@master
@@ -35,5 +35,5 @@ jobs:
       -
         name: Upload images
         run: |
-          docker push index.docker.io/library/kryjex/docker-wordpress:latest && \
-          docker push index.docker.io/library/kryjex/docker-wordpress:arm64
+          docker push kryjex/docker-wordpress:latest && \
+          docker push kryjex/docker-wordpress:arm64
