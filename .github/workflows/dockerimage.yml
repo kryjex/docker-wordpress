@@ -1,0 +1,39 @@
+name: build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v1
+      -
+        name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: latest
+      -
+        name: Run Buildx (x64)
+        run: |
+          docker buildx build --load --platform linux/amd64 \
+          -t docker.pkg.github.com/kryjex/docker-wordpress:latest .
+      -
+        name: Run Buildx (ARM)
+        run: |
+          docker buildx build --load --platform linux/arm64 \
+          -t docker.pkg.github.com/kryjex/docker-wordpress:arm64 .
+      -
+        name: Login
+        uses: azure/container-actions/docker-login@master
+        with:
+          login-server: index.docker.io
+          username: kryjex
+          password: ${{ secrets.GITHUB_PACKAGE_REGISTRY_TOKEN }}
+      -
+        name: Upload images
+        run: |
+          docker push index.docker.io/kryjex/docker-wordpress:latest && \
+          docker push index.docker.io/kryjex/docker-wordpress:arm64
