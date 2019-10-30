@@ -31,9 +31,9 @@ jobs:
         with:
           login-server: index.docker.io
           username: kryjex
-          password: ${{ secrets.GITHUB_PACKAGE_REGISTRY_TOKEN }}
+          password: ${{ secrets.REGISTRY_TOKEN }}
       -
         name: Upload images
         run: |
-          docker push index.docker.io/kryjex/docker-wordpress:latest && \
-          docker push index.docker.io/kryjex/docker-wordpress:arm64
+          docker push index.docker.io/library/kryjex/docker-wordpress:latest && \
+          docker push index.docker.io/library/kryjex/docker-wordpress:arm64
